@@ -4,11 +4,11 @@ Duplicate a **Titan Quest II** character under a new name — full level, invent
 
 ## Download
 
-Grab `tq2clone_gui.exe` from the [Releases](../../releases/latest) page.
+Grab `tq2clone.exe` from the [Releases](../../releases/latest) page.
 
 ## Usage
 
-1. Run `tq2clone_gui.exe`
+1. Run `tq2clone.exe`
 2. Select the source character from the dropdown
 3. Type a new character name
 4. Click **Clone Character**
@@ -25,7 +25,8 @@ TQ2 stores each character as a set of `.sav` files in `%LOCALAPPDATA%\TQ2\Saved\
 Requires [Zig](https://ziglang.org/).
 
 ```bat
-zig cc tq2clone_gui.c -o tq2clone_gui.exe -O2 ^
-    -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 -ladvapi32 ^
+zig rc tq2clone.rc
+zig cc tq2clone.c tq2clone.res -o tq2clone.exe -O2 ^
+    -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 ^
     "-Wl,--subsystem,windows"
 ```

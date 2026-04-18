@@ -21,12 +21,11 @@ jobs:
 
       - name: Build
         shell: cmd
-        run: >
-          zig cc tq2clone_gui.c -o tq2clone_gui.exe -O2
-          -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 -ladvapi32
-          "-Wl,--subsystem,windows"
+        run: |
+          zig rc tq2clone.rc
+          zig cc tq2clone.c tq2clone.res -o tq2clone.exe -O2 -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 "-Wl,--subsystem,windows"
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: tq2clone_gui.exe
+          files: tq2clone.exe
