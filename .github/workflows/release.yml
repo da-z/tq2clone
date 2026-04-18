@@ -18,17 +18,14 @@ jobs:
           version: 0.14.0
 
       - name: Build
-        run: |
-          zig cc tq2clone.c -o tq2clone.exe -O2 -lkernel32
-          zig cc tq2clone_gui.c -o tq2clone_gui.exe -O2 `
-            -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 -ladvapi32 `
-            -Wl,--subsystem,windows
-
-      - name: Package
-        run: Compress-Archive -Path tq2clone.exe, tq2clone_gui.exe -DestinationPath tq2clone.zip
+        shell: cmd
+        run: >
+          zig cc tq2clone_gui.c -o tq2clone_gui.exe -O2
+          -lkernel32 -luser32 -lgdi32 -lcomctl32 -lshell32 -ladvapi32
+          "-Wl,--subsystem,windows"
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: tq2clone.zip
+          files: tq2clone_gui.exe
           generate_release_notes: true
